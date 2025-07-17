@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberGuard - Stay Safe Online</title>
+    <title>CyberGuard - Cybersecurity Awareness Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -24,36 +25,30 @@
             padding: 0 20px;
         }
 
-        /* Navigation */
-        nav {
+        /* Header */
+        header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
             top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
+            z-index: 100;
         }
 
-        .nav-container {
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1rem 0;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #4f46e5;
+            color: #667eea;
             display: flex;
             align-items: center;
-        }
-
-        .logo::before {
-            content: '🛡️';
-            margin-right: 0.5rem;
+            gap: 0.5rem;
         }
 
         .nav-links {
@@ -66,12 +61,11 @@
             text-decoration: none;
             color: #333;
             font-weight: 500;
-            transition: color 0.3s ease;
-            cursor: pointer;
+            transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: #4f46e5;
+            color: #667eea;
         }
 
         .auth-buttons {
@@ -80,45 +74,45 @@
         }
 
         .btn {
-            padding: 0.5rem 1.5rem;
+            padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 8px;
-            font-weight: 500;
+            border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
+            text-align: center;
         }
 
         .btn-primary {
-            background: #4f46e5;
+            background: #667eea;
             color: white;
         }
 
         .btn-primary:hover {
-            background: #4338ca;
+            background: #5a6fd8;
             transform: translateY(-2px);
         }
 
         .btn-secondary {
             background: transparent;
-            color: #4f46e5;
-            border: 2px solid #4f46e5;
+            color: #667eea;
+            border: 2px solid #667eea;
         }
 
         .btn-secondary:hover {
-            background: #4f46e5;
+            background: #667eea;
             color: white;
         }
 
-        /* Page Sections */
-        .page {
+        /* Main Content */
+        main {
             display: none;
-            padding: 100px 0 50px;
-            min-height: 100vh;
+            padding: 2rem 0;
         }
 
-        .page.active {
+        main.active {
             display: block;
         }
 
@@ -126,53 +120,57 @@
         .hero {
             text-align: center;
             padding: 4rem 0;
-            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
+            color: white;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 2rem;
-            opacity: 0.9;
         }
 
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin: 3rem 0;
         }
 
         .feature-card {
             background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
-            border-radius: 16px;
+            border-radius: 15px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
         }
 
-        .feature-card h3 {
-            color: #4f46e5;
+        .feature-card i {
+            font-size: 3rem;
+            color: #667eea;
             margin-bottom: 1rem;
         }
 
-        /* Auth Forms */
-        .auth-container {
-            max-width: 400px;
-            margin: 0 auto;
-            background: white;
+        /* Authentication Forms */
+        .auth-form {
+            background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
-            border-radius: 16px;
+            border-radius: 15px;
+            max-width: 400px;
+            margin: 2rem auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
@@ -184,67 +182,99 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
-            color: #333;
         }
 
         .form-group input {
             width: 100%;
             padding: 0.75rem;
-            border: 2px solid #e5e7eb;
+            border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 1rem;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #4f46e5;
+            border-color: #667eea;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
         }
 
         /* Dashboard */
-        .dashboard-grid {
+        .dashboard {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 250px 1fr;
             gap: 2rem;
-            margin-top: 2rem;
+            min-height: 80vh;
         }
 
-        .dashboard-card {
-            background: white;
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            border-radius: 15px;
+            height: fit-content;
         }
 
-        .dashboard-card h3 {
-            color: #4f46e5;
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
             margin-bottom: 1rem;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #e5e7eb;
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 1rem 0;
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: background 0.3s;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: #4f46e5;
-            transition: width 0.3s ease;
+        .sidebar a:hover, .sidebar a.active {
+            background: #667eea;
+            color: white;
         }
 
-        /* Quiz */
-        .quiz-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
+        .dashboard-content {
+            background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
         }
 
         .question {
@@ -252,777 +282,1264 @@
         }
 
         .question h3 {
-            color: #4f46e5;
             margin-bottom: 1rem;
+            color: #333;
         }
 
         .options {
-            display: flex;
-            flex-direction: column;
+            display: grid;
             gap: 0.5rem;
         }
 
         .option {
-            padding: 1rem;
-            border: 2px solid #e5e7eb;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
         .option:hover {
-            border-color: #4f46e5;
-            background: #f8fafc;
+            background: #e9ecef;
         }
 
         .option.selected {
-            border-color: #4f46e5;
-            background: #eff6ff;
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
         }
 
         .option.correct {
-            border-color: #10b981;
-            background: #ecfdf5;
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
         }
 
         .option.incorrect {
-            border-color: #ef4444;
-            background: #fef2f2;
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
         }
 
-        /* Phishing Simulation */
-        .phishing-demo {
-            max-width: 500px;
-            margin: 2rem auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .fake-browser {
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-
-        .fake-url-bar {
-            background: #f3f4f6;
-            padding: 0.5rem;
-            border-bottom: 1px solid #e5e7eb;
-            font-family: monospace;
-            font-size: 0.9rem;
-        }
-
-        .fake-content {
-            padding: 2rem;
+        /* Results */
+        .results {
             text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            margin: 2rem 0;
         }
 
-        .warning-banner {
-            background: #fef3c7;
-            border: 2px solid #f59e0b;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-            text-align: center;
-            font-weight: 500;
-            color: #92400e;
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#667eea 0deg, #667eea var(--percentage), #e0e0e0 var(--percentage));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
         }
 
         /* AI Assistant */
         .chat-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .chat-header {
-            background: #4f46e5;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            font-weight: 500;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            margin: 2rem 0;
         }
 
         .chat-messages {
-            height: 400px;
-            overflow-y: auto;
+            flex: 1;
             padding: 1rem;
-            background: #f8fafc;
+            overflow-y: auto;
+            border-bottom: 2px solid #e0e0e0;
         }
 
         .message {
             margin-bottom: 1rem;
             padding: 0.75rem;
-            border-radius: 8px;
-            max-width: 80%;
+            border-radius: 10px;
+            max-width: 70%;
         }
 
         .message.user {
-            background: #4f46e5;
+            background: #667eea;
             color: white;
             margin-left: auto;
         }
 
-        .message.bot {
-            background: white;
-            border: 1px solid #e5e7eb;
+        .message.ai {
+            background: #f8f9fa;
+            color: #333;
         }
 
         .chat-input {
             display: flex;
+            gap: 1rem;
             padding: 1rem;
-            border-top: 1px solid #e5e7eb;
         }
 
         .chat-input input {
             flex: 1;
             padding: 0.75rem;
-            border: 2px solid #e5e7eb;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        /* Phishing Simulation */
+        .phishing-demo {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .warning-banner {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 1rem;
             border-radius: 8px;
-            margin-right: 0.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #856404;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-in {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        /* Utilities */
-        .hidden {
-            display: none;
-        }
-
-        .text-center {
+        .fake-login {
+            background: #f8f9fa;
+            border: 2px dashed #dc3545;
+            padding: 2rem;
+            border-radius: 10px;
             text-align: center;
         }
 
-        .mt-2 {
-            margin-top: 1rem;
+        /* Profile */
+        .profile-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
         }
 
-        .mb-2 {
-            margin-bottom: 1rem;
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">CyberGuard</div>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                CyberGuard
+            </div>
             <ul class="nav-links">
-                <li><a onclick="showPage('home')">Home</a></li>
-                <li><a onclick="showPage('dashboard')">Dashboard</a></li>
-                <li><a onclick="showPage('quiz')">Quiz</a></li>
-                <li><a onclick="showPage('phishing')">Phishing Demo</a></li>
-                <li><a onclick="showPage('ai-assistant')">AI Assistant</a></li>
-                <li><a onclick="showPage('about')">About</a></li>
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
             </ul>
-            <div class="auth-buttons" id="authButtons">
-                <button class="btn btn-secondary" onclick="showPage('login')">Login</button>
-                <button class="btn btn-primary" onclick="showPage('signup')">Sign Up</button>
+            <div class="auth-buttons">
+                <button class="btn btn-secondary" onclick="showPage('login')" id="loginBtn">Login</button>
+                <button class="btn btn-primary" onclick="showPage('register')" id="registerBtn">Sign Up</button>
+                <button class="btn btn-primary hidden" onclick="logout()" id="logoutBtn">Logout</button>
             </div>
-            <div class="auth-buttons hidden" id="userMenu">
-                <span id="userName">Welcome, User!</span>
-                <button class="btn btn-secondary" onclick="logout()">Logout</button>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <!-- Home Page -->
-    <div class="page active" id="home">
+    <main id="home" class="active">
         <div class="container">
-            <div class="hero animate-fade-in">
+            <div class="hero">
                 <h1>Stay Safe in the Digital World</h1>
-                <p>Learn to identify threats, protect your data, and become a cybersecurity expert</p>
-                <button class="btn btn-primary" onclick="showPage('signup')">Get Started</button>
+                <p>Learn to identify threats, protect your data, and build strong cybersecurity habits</p>
+                <button class="btn btn-primary" onclick="showPage('register')">Get Started</button>
             </div>
             
             <div class="features">
-                <div class="feature-card animate-fade-in">
-                    <h3>🎯 Interactive Quizzes</h3>
-                    <p>Test your knowledge with engaging cybersecurity quizzes and track your progress</p>
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>AI-Powered Learning</h3>
+                    <p>Get personalized cybersecurity guidance from our AI assistant</p>
                 </div>
-                <div class="feature-card animate-fade-in">
-                    <h3>🎣 Phishing Simulations</h3>
-                    <p>Experience realistic phishing scenarios in a safe environment</p>
+                <div class="feature-card">
+                    <i class="fas fa-fish"></i>
+                    <h3>Phishing Detection</h3>
+                    <p>Learn to spot and avoid phishing attempts through interactive simulations</p>
                 </div>
-                <div class="feature-card animate-fade-in">
-                    <h3>🤖 AI Security Assistant</h3>
-                    <p>Get instant answers to your cybersecurity questions from our AI expert</p>
+                <div class="feature-card">
+                    <i class="fas fa-quiz"></i>
+                    <h3>Interactive Quizzes</h3>
+                    <p>Test your knowledge with comprehensive cybersecurity assessments</p>
                 </div>
-                <div class="feature-card animate-fade-in">
-                    <h3>📊 Progress Tracking</h3>
-                    <p>Monitor your learning journey and earn achievements</p>
-                </div>
-                <div class="feature-card animate-fade-in">
-                    <h3>📱 Mobile Friendly</h3>
-                    <p>Learn on-the-go with our responsive design</p>
-                </div>
-                <div class="feature-card animate-fade-in">
-                    <h3>🔒 Real-time Threats</h3>
-                    <p>Stay updated with the latest cybersecurity threats and news</p>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your learning journey and cybersecurity skill development</p>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Login Page -->
-    <div class="page" id="login">
+    <main id="login">
         <div class="container">
-            <div class="auth-container animate-fade-in">
-                <h2 class="text-center mb-2">Login to CyberGuard</h2>
+            <div class="auth-form">
+                <h2>Login to CyberGuard</h2>
                 <form id="loginForm">
                     <div class="form-group">
                         <label for="loginEmail">Email</label>
                         <input type="email" id="loginEmail" required>
+                        <div class="error-message" id="loginEmailError"></div>
                     </div>
                     <div class="form-group">
                         <label for="loginPassword">Password</label>
                         <input type="password" id="loginPassword" required>
+                        <div class="error-message" id="loginPasswordError"></div>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                    <p style="text-align: center; margin-top: 1rem;">
+                        Don't have an account? <a href="#" onclick="showPage('register')">Sign up</a>
+                    </p>
                 </form>
-                <p class="text-center mt-2">
-                    Don't have an account? <a href="#" onclick="showPage('signup')">Sign up</a>
-                </p>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Signup Page -->
-    <div class="page" id="signup">
+    <!-- Register Page -->
+    <main id="register">
         <div class="container">
-            <div class="auth-container animate-fade-in">
-                <h2 class="text-center mb-2">Join CyberGuard</h2>
-                <form id="signupForm">
+            <div class="auth-form">
+                <h2>Create Account</h2>
+                <form id="registerForm">
                     <div class="form-group">
-                        <label for="signupName">Full Name</label>
-                        <input type="text" id="signupName" required>
+                        <label for="regName">Full Name</label>
+                        <input type="text" id="regName" required>
+                        <div class="error-message" id="regNameError"></div>
                     </div>
                     <div class="form-group">
-                        <label for="signupEmail">Email</label>
-                        <input type="email" id="signupEmail" required>
+                        <label for="regEmail">Email</label>
+                        <input type="email" id="regEmail" required>
+                        <div class="error-message" id="regEmailError"></div>
                     </div>
                     <div class="form-group">
-                        <label for="signupPassword">Password</label>
-                        <input type="password" id="signupPassword" required>
+                        <label for="regPassword">Password</label>
+                        <input type="password" id="regPassword" required>
+                        <div class="error-message" id="regPasswordError"></div>
                     </div>
                     <div class="form-group">
-                        <label for="signupConfirmPassword">Confirm Password</label>
-                        <input type="password" id="signupConfirmPassword" required>
+                        <label for="regConfirmPassword">Confirm Password</label>
+                        <input type="password" id="regConfirmPassword" required>
+                        <div class="error-message" id="regConfirmPasswordError"></div>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                    <p style="text-align: center; margin-top: 1rem;">
+                        Already have an account? <a href="#" onclick="showPage('login')">Login</a>
+                    </p>
                 </form>
-                <p class="text-center mt-2">
-                    Already have an account? <a href="#" onclick="showPage('login')">Login</a>
-                </p>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Dashboard -->
-    <div class="page" id="dashboard">
+    <main id="dashboard">
         <div class="container">
-            <h2 class="text-center mb-2" style="color: white;">Your Learning Dashboard</h2>
-            <div class="dashboard-grid">
-                <div class="dashboard-card animate-fade-in">
-                    <h3>📊 Overall Progress</h3>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="overallProgress" style="width: 65%"></div>
-                    </div>
-                    <p>65% Complete</p>
-                </div>
-                <div class="dashboard-card animate-fade-in">
-                    <h3>🎯 Quiz Score</h3>
-                    <div style="font-size: 2rem; color: #4f46e5; font-weight: bold;">85%</div>
-                    <p>Average Score</p>
-                </div>
-                <div class="dashboard-card animate-fade-in">
-                    <h3>🏆 Achievements</h3>
-                    <div style="font-size: 2rem;">🥇🥈🥉</div>
-                    <p>3 Badges Earned</p>
-                </div>
-                <div class="dashboard-card animate-fade-in">
-                    <h3>⚠️ Threat Alerts</h3>
-                    <div style="color: #ef4444; font-weight: bold;">2 New Threats</div>
-                    <p>Check AI Assistant</p>
-                </div>
-                <div class="dashboard-card animate-fade-in">
-                    <h3>📧 Email Security</h3>
-                    <div style="color: #10b981; font-weight: bold;">✓ Secure</div>
-                    <p>Last scan: Today</p>
-                </div>
-                <div class="dashboard-card animate-fade-in">
-                    <h3>🔐 Password Strength</h3>
-                    <div style="color: #f59e0b; font-weight: bold;">Medium</div>
-                    <p>Consider updating</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Quiz Page -->
-    <div class="page" id="quiz">
-        <div class="container">
-            <h2 class="text-center mb-2" style="color: white;">Cybersecurity Quiz</h2>
-            <div class="quiz-container animate-fade-in">
-                <div id="quizContent">
-                    <div class="question" id="question1">
-                        <h3>Question 1: What is phishing?</h3>
-                        <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">A type of computer virus</div>
-                            <div class="option" onclick="selectOption(this, true)">A fraudulent attempt to obtain sensitive information</div>
-                            <div class="option" onclick="selectOption(this, false)">A method of encrypting data</div>
-                            <div class="option" onclick="selectOption(this, false)">A type of firewall</div>
-                        </div>
-                    </div>
-                    <div class="question hidden" id="question2">
-                        <h3>Question 2: Which of these is a strong password?</h3>
-                        <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">123456</div>
-                            <div class="option" onclick="selectOption(this, false)">password</div>
-                            <div class="option" onclick="selectOption(this, true)">Tr0ub4dor&3</div>
-                            <div class="option" onclick="selectOption(this, false)">qwerty</div>
-                        </div>
-                    </div>
-                    <div class="question hidden" id="question3">
-                        <h3>Question 3: What does MFA stand for?</h3>
-                        <div class="options">
-                            <div class="option" onclick="selectOption(this, false)">Multiple File Access</div>
-                            <div class="option" onclick="selectOption(this, true)">Multi-Factor Authentication</div>
-                            <div class="option" onclick="selectOption(this, false)">Master File Archive</div>
-                            <div class="option" onclick="selectOption(this, false)">Mobile Firewall Application</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-2">
-                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" style="display: none;">Next Question</button>
-                    <button class="btn btn-primary" id="finishBtn" onclick="finishQuiz()" style="display: none;">Finish Quiz</button>
-                </div>
-                <div id="quizResults" class="hidden">
-                    <h3 class="text-center">Quiz Complete!</h3>
-                    <p class="text-center">Your Score: <span id="finalScore"></span></p>
-                    <button class="btn btn-primary" onclick="restartQuiz()" style="width: 100%;">Retake Quiz</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Phishing Simulation -->
-    <div class="page" id="phishing">
-        <div class="container">
-            <h2 class="text-center mb-2" style="color: white;">Phishing Simulation</h2>
-            <div class="phishing-demo animate-fade-in">
-                <div class="warning-banner">
-                    ⚠️ This is a SAFE simulation for educational purposes only!
-                </div>
-                
-                <div class="fake-browser">
-                    <div class="fake-url-bar">
-                        🔒 https://secure-baking-login.com/signin
-                    </div>
-                    <div class="fake-content">
-                        <h3>🏦 SecureBank Login</h3>
-                        <p>Your session has expired. Please login again.</p>
-                        <form id="phishingForm">
-                            <div class="form-group">
-                                <label>Username</label>
-                                <input type="text" placeholder="Enter your username">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" placeholder="Enter your password">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </form>
-                    </div>
-                </div>
-                
-                <div id="phishingAlert" class="hidden">
-                    <h3 style="color: #ef4444;">🚨 PHISHING DETECTED!</h3>
-                    <p><strong>Red flags you should have noticed:</strong></p>
+            <div class="dashboard">
+                <div class="sidebar">
                     <ul>
-                        <li>URL misspelling: "baking" instead of "banking"</li>
-                        <li>Suspicious domain that doesn't match the real bank</li>
-                        <li>Urgent language about "expired session"</li>
-                        <li>Generic "SecureBank" name instead of real bank name</li>
+                        <li><a href="#" onclick="showDashboardSection('overview')" class="active"><i class="fas fa-home"></i> Overview</a></li>
+                        <li><a href="#" onclick="showDashboardSection('profile')"><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a href="#" onclick="showDashboardSection('quiz')"><i class="fas fa-quiz"></i> Take Quiz</a></li>
+                        <li><a href="#" onclick="showDashboardSection('phishing')"><i class="fas fa-fish"></i> Phishing Demo</a></li>
+                        <li><a href="#" onclick="showDashboardSection('ai-assistant')"><i class="fas fa-robot"></i> AI Assistant</a></li>
+                        <li><a href="#" onclick="showDashboardSection('progress')"><i class="fas fa-chart-line"></i> Progress</a></li>
                     </ul>
-                    <p><strong>Always verify:</strong> Check the URL carefully, contact your bank directly, and never enter credentials from email links!</p>
                 </div>
-            </div>
-        </div>
-    </div>
+                <div class="dashboard-content">
+                    <div id="overview" class="dashboard-section">
+                        <h2>Welcome back, <span id="userName">User</span>!</h2>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h3 id="totalQuizzes">0</h3>
+                                <p>Quizzes Completed</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="averageScore">0%</h3>
+                                <p>Average Score</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="securityScore">0</h3>
+                                <p>Security Score</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="threatsStopped">0</h3>
+                                <p>Threats Identified</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Recent Activity</h3>
+                            <div id="recentActivity">
+                                <p>No recent activity to display.</p>
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- AI Assistant -->
-    <div class="page" id="ai-assistant">
-        <div class="container">
-            <h2 class="text-center mb-2" style="color: white;">AI Security Assistant</h2>
-            <div class="chat-container animate-fade-in">
-                <div class="chat-header">
-                    🤖 CyberGuard AI Assistant
-                </div>
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message bot">
-                        Hello! I'm your AI cybersecurity assistant. I can help you with:
-                        <ul>
-                            <li>Identifying phishing attempts</li>
-                            <li>Password security tips</li>
-                            <li>Latest threat information</li>
-                            <li>Security best practices</li>
-                        </ul>
-                        What would you like to know?
+                    <div id="profile" class="dashboard-section hidden">
+                        <h2>Profile Settings</h2>
+                        <div class="profile-section">
+                            <div class="profile-header">
+                                <div class="profile-avatar" id="profileAvatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h3 id="profileName">User Name</h3>
+                                    <p id="profileEmail">user@example.com</p>
+                                </div>
+                            </div>
+                            <form id="profileForm">
+                                <div class="form-group">
+                                    <label for="profileFullName">Full Name</label>
+                                    <input type="text" id="profileFullName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileEmailInput">Email</label>
+                                    <input type="email" id="profileEmailInput" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profilePhone">Phone Number</label>
+                                    <input type="tel" id="profilePhone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileCompany">Company</label>
+                                    <input type="text" id="profileCompany">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Profile</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="quiz" class="dashboard-section hidden">
+                        <h2>Cybersecurity Quiz</h2>
+                        <div class="quiz-container">
+                            <div id="quizContent">
+                                <div class="question" id="question1">
+                                    <h3>1. What is the most common type of cybersecurity attack?</h3>
+                                    <div class="options">
+                                        <div class="option" onclick="selectOption(this, false)">SQL Injection</div>
+                                        <div class="option" onclick="selectOption(this, true)">Phishing</div>
+                                        <div class="option" onclick="selectOption(this, false)">DDoS Attack</div>
+                                        <div class="option" onclick="selectOption(this, false)">Malware</div>
+                                    </div>
+                                </div>
+                                <div class="question" id="question2">
+                                    <h3>2. Which of these is a strong password characteristic?</h3>
+                                    <div class="options">
+                                        <div class="option" onclick="selectOption(this, false)">Uses only lowercase letters</div>
+                                        <div class="option" onclick="selectOption(this, false)">Contains personal information</div>
+                                        <div class="option" onclick="selectOption(this, true)">Contains uppercase, lowercase, numbers, and symbols</div>
+                                        <div class="option" onclick="selectOption(this, false)">Is easy to remember</div>
+                                    </div>
+                                </div>
+                                <div class="question" id="question3">
+                                    <h3>3. What should you do if you receive a suspicious email?</h3>
+                                    <div class="options">
+                                        <div class="option" onclick="selectOption(this, false)">Click on links to verify</div>
+                                        <div class="option" onclick="selectOption(this, true)">Delete it immediately</div>
+                                        <div class="option" onclick="selectOption(this, false)">Forward it to friends</div>
+                                        <div class="option" onclick="selectOption(this, false)">Reply asking for more information</div>
+                                    </div>
+                                </div>
+                                <div class="question" id="question4">
+                                    <h3>4. What is two-factor authentication (2FA)?</h3>
+                                    <div class="options">
+                                        <div class="option" onclick="selectOption(this, false)">Using two different passwords</div>
+                                        <div class="option" onclick="selectOption(this, true)">Using two different methods to verify identity</div>
+                                        <div class="option" onclick="selectOption(this, false)">Having two email accounts</div>
+                                        <div class="option" onclick="selectOption(this, false)">Using two different browsers</div>
+                                    </div>
+                                </div>
+                                <div class="question" id="question5">
+                                    <h3>5. What is the safest way to connect to public Wi-Fi?</h3>
+                                    <div class="options">
+                                        <div class="option" onclick="selectOption(this, false)">Connect directly without precautions</div>
+                                        <div class="option" onclick="selectOption(this, true)">Use a VPN</div>
+                                        <div class="option" onclick="selectOption(this, false)">Only use password-protected networks</div>
+                                        <div class="option" onclick="selectOption(this, false)">Avoid all public Wi-Fi</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" onclick="submitQuiz()" id="submitQuizBtn">Submit Quiz</button>
+                        </div>
+                    </div>
+
+                    <div id="phishing" class="dashboard-section hidden">
+                        <h2>Phishing Simulation</h2>
+                        <div class="phishing-demo">
+                            <div class="warning-banner">
+                                <strong>⚠️ EDUCATIONAL SIMULATION</strong><br>
+                                This is a fake login page designed to teach you about phishing attacks.
+                            </div>
+                            <div class="fake-login">
+                                <h3>Fake Bank Login</h3>
+                                <p>This is what a phishing site might look like:</p>
+                                <form onclick="showPhishingAlert()" style="max-width: 300px; margin: 1rem auto;">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Username" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0;">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" placeholder="Password" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0;">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" onclick="showPhishingAlert()">Login</button>
+                                </form>
+                            </div>
+                            <div style="margin-top: 2rem;">
+                                <h3>Red Flags to Watch For:</h3>
+                                <ul style="text-align: left; margin: 1rem 0; padding-left: 2rem;">
+                                    <li>Suspicious URLs (check the address bar)</li>
+                                    <li>Poor grammar and spelling</li>
+                                    <li>Urgent or threatening language</li>
+                                    <li>Requests for sensitive information</li>
+                                    <li>Unexpected emails or messages</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="ai-assistant" class="dashboard-section hidden">
+                        <h2>AI Cybersecurity Assistant</h2>
+                        <div class="chat-container">
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="message ai">
+                                    <strong>CyberGuard AI:</strong> Hello! I'm here to help you with cybersecurity questions. Ask me anything about online safety, password security, phishing, or other cybersecurity topics.
+                                </div>
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" id="chatInput" placeholder="Ask me about cybersecurity..." onkeypress="handleChatKeyPress(event)">
+                                <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="progress" class="dashboard-section hidden">
+                        <h2>Your Progress</h2>
+                        <div class="profile-section">
+                            <div>
+                                <h3>Overall Security Score</h3>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="overallProgress" style="width: 0%"></div>
+                                </div>
+                                <p id="overallProgressText">0% - Getting Started</p>
+                            </div>
+                            <div style="margin-top: 2rem;">
+                                <h3>Quiz Performance</h3>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="quizProgress" style="width: 0%"></div>
+                                </div>
+                                <p id="quizProgressText">0% - No quizzes completed</p>
+                            </div>
+                            <div style="margin-top: 2rem;">
+                                <h3>Learning Modules</h3>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="moduleProgress" style="width: 0%"></div>
+                                </div>
+                                <p id="moduleProgressText">0% - No modules completed</p>
+                            </div>
+                            <div style="margin-top: 2rem;">
+                                <h3>Recent Achievements</h3>
+                                <div id="achievements">
+                                    <p>Complete your first quiz to earn achievements!</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="chat-input">
-                    <input type="text" id="chatInput" placeholder="Ask me about cybersecurity...">
-                    <button class="btn btn-primary" onclick="sendMessage()">Send</button>
-                </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- About Page -->
-    <div class="page" id="about">
+    <main id="about">
         <div class="container">
-            <div class="auth-container animate-fade-in">
-                <h2 class="text-center mb-2">About CyberGuard</h2>
-                <p>CyberGuard is an innovative cybersecurity awareness platform designed to help users learn essential online security skills through interactive experiences.</p>
-                
-                <h3>Our Mission</h3>
-                <p>To make cybersecurity education accessible, engaging, and effective for everyone, regardless of their technical background.</p>
+            <div class="profile-section">
+                <h2>About CyberGuard</h2>
+                <p>CyberGuard is a comprehensive cybersecurity awareness platform designed to educate users about online threats and best practices for digital safety. Our mission is to make cybersecurity knowledge accessible to everyone.</p>
                 
                 <h3>Features</h3>
-                <ul>
-                    <li>Interactive quizzes with instant feedback</li>
-                    <li>Safe phishing simulations</li>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li>Interactive cybersecurity quizzes</li>
                     <li>AI-powered security assistant</li>
+                    <li>Phishing simulation exercises</li>
                     <li>Progress tracking and achievements</li>
-                    <li>Real-time threat monitoring</li>
-                    <li>Mobile-responsive design</li>
+                    <li>Personalized learning recommendations</li>
                 </ul>
                 
-                <h3>Contact Us</h3>
-                <p>Email: info@cyberguard.com<br>
-                Phone: +234 (0) 080 456 7890<br>
-                Address: Bauchi, Nigeria</p>
-                
-            
-                </p>
+                <h3>Our Mission</h3>
+                <p>To create a safer digital world by empowering individuals with the knowledge and tools they need to protect themselves online.</p>
             </div>
+        </div>
+    </main>
+
+    <!-- Contact Page -->
+    <main id="contact">
+        <div class="container">
+            <div class="auth-form">
+                <h2>Contact Us</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="contactName">Name</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactSubject">Subject</label>
+                        <input type="text" id="contactSubject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" rows="5" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px; font-family: inherit; resize: vertical;" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Quiz Results Modal -->
+    <div id="quizResults" class="results hidden">
+        <div class="container">
+            <h2>Quiz Results</h2>
+            <div class="score-circle" id="scoreCircle">
+                <span id="scoreText">0/5</span>
+            </div>
+            <h3 id="resultTitle">Great Job!</h3>
+            <p id="resultMessage">You've completed the cybersecurity quiz.</p>
+            <div id="resultTips" style="text-align: left; margin: 2rem 0;"></div>
+            <button class="btn btn-primary" onclick="resetQuiz()">Take Quiz Again</button>
+            <button class="btn btn-secondary" onclick="showDashboardSection('overview')">Back to Dashboard</button>
         </div>
     </div>
 
     <script>
         // Global variables
         let currentUser = null;
-        let currentQuestion = 1;
-        let quizScore = 0;
-        let totalQuestions = 3;
+        let users = [];
+        let quizAnswers = [];
+        let quizSubmitted = false;
+        let userStats = {
+            totalQuizzes: 0,
+            totalScore: 0,
+            averageScore: 0,
+            securityScore: 50,
+            threatsStopped: 0,
+            recentActivity: []
+        };
 
-        // Page navigation
-        function showPage(pageId) {
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUsers();
+            checkAuthStatus();
+            initializeForms();
+        });
+
+        // User Management
+        function loadUsers() {
+            const savedUsers = localStorage.getItem('cyberguard_users');
+            if (savedUsers) {
+                users = JSON.parse(savedUsers);
+            }
         }
 
-        // Authentication
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            // Simple validation (in real app, this would be server-side)
-            if (email && password) {
-                currentUser = { email: email, name: email.split('@')[0] };
-                updateAuthUI();
-                showPage('dashboard');
-                showNotification('Login successful!', 'success');
-            }
-        });
+        function saveUsers() {
+            localStorage.setItem('cyberguard_users', JSON.stringify(users));
+        }
 
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('signupName').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-            const confirmPassword = document.getElementById('signupConfirmPassword').value;
-            
-            if (password !== confirmPassword) {
-                showNotification('Passwords do not match!', 'error');
-                return;
+        function saveUserStats() {
+            if (currentUser) {
+                currentUser.stats = userStats;
+                saveUsers();
             }
-            
-            if (name && email && password) {
-                currentUser = { email: email, name: name };
-                updateAuthUI();
+        }
+
+        function checkAuthStatus() {
+            const savedUser = localStorage.getItem('cyberguard_currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                userStats = currentUser.stats || userStats;
+                showAuthenticatedState();
                 showPage('dashboard');
-                showNotification('Account created successfully!', 'success');
             }
-        });
+        }
+
+        function showAuthenticatedState() {
+            document.getElementById('loginBtn').classList.add('hidden');
+            document.getElementById('registerBtn').classList.add('hidden');
+            document.getElementById('logoutBtn').classList.remove('hidden');
+            updateDashboard();
+        }
+
+        function showUnauthenticatedState() {
+            document.getElementById('loginBtn').classList.remove('hidden');
+            document.getElementById('registerBtn').classList.remove('hidden');
+            document.getElementById('logoutBtn').classList.add('hidden');
+        }
 
         function logout() {
             currentUser = null;
-            updateAuthUI();
+            userStats = {
+                totalQuizzes: 0,
+                totalScore: 0,
+                averageScore: 0,
+                securityScore: 50,
+                threatsStopped: 0,
+                recentActivity: []
+            };
+            localStorage.removeItem('cyberguard_currentUser');
+            showUnauthenticatedState();
             showPage('home');
-            showNotification('Logged out successfully!', 'success');
         }
 
-        function updateAuthUI() {
-            const authButtons = document.getElementById('authButtons');
-            const userMenu = document.getElementById('userMenu');
-            const userName = document.getElementById('userName');
+        // Form Handling
+        function initializeForms() {
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('registerForm').addEventListener('submit', handleRegister);
+            document.getElementById('profileForm').addEventListener('submit', handleProfileUpdate);
+            document.getElementById('contactForm').addEventListener('submit', handleContact);
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            clearErrors();
             
-            if (currentUser) {
-                authButtons.classList.add('hidden');
-                userMenu.classList.remove('hidden');
-                userName.textContent = `Welcome, ${currentUser.name}!`;
-            } else {
-                authButtons.classList.remove('hidden');
-                userMenu.classList.add('hidden');
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Validation
+            if (!validateEmail(email)) {
+                showError('loginEmailError', 'Please enter a valid email address');
+                return;
             }
+            
+            if (password.length < 1) {
+                showError('loginPasswordError', 'Password is required');
+                return;
+            }
+            
+            // Find user
+            const user = users.find(u => u.email === email);
+            if (!user) {
+                showError('loginEmailError', 'User not found');
+                return;
+            }
+            
+            if (user.password !== password) {
+                showError('loginPasswordError', 'Incorrect password');
+                return;
+            }
+            
+            // Login successful
+            currentUser = user;
+            userStats = user.stats || userStats;
+            localStorage.setItem('cyberguard_currentUser', JSON.stringify(currentUser));
+            showAuthenticatedState();
+            showPage('dashboard');
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            clearErrors();
+            
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            
+            // Validation
+            if (name.length < 2) {
+                showError('regNameError', 'Name must be at least 2 characters');
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                showError('regEmailError', 'Please enter a valid email address');
+                return;
+            }
+            
+            if (users.find(u => u.email === email)) {
+                showError('regEmailError', 'Email already exists');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError('regPasswordError', 'Password must be at least 6 characters');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showError('regConfirmPasswordError', 'Passwords do not match');
+                return;
+            }
+            
+            // Create user
+            const newUser = {
+                id: Date.now(),
+                name,
+                email,
+                password,
+                phone: '',
+                company: '',
+                stats: {
+                    totalQuizzes: 0,
+                    totalScore: 0,
+                    averageScore: 0,
+                    securityScore: 50,
+                    threatsStopped: 0,
+                    recentActivity: []
+                },
+                createdAt: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            saveUsers();
+            
+            // Auto login
+            currentUser = newUser;
+            userStats = newUser.stats;
+            localStorage.setItem('cyberguard_currentUser', JSON.stringify(currentUser));
+            showAuthenticatedState();
+            showPage('dashboard');
+        }
+
+        function handleProfileUpdate(e) {
+            e.preventDefault();
+            
+            if (!currentUser) return;
+            
+            const name = document.getElementById('profileFullName').value;
+            const email = document.getElementById('profileEmailInput').value;
+            const phone = document.getElementById('profilePhone').value;
+            const company = document.getElementById('profileCompany').value;
+            
+            // Validation
+            if (name.length < 2) {
+                alert('Name must be at least 2 characters');
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // Check if email exists for other users
+            const existingUser = users.find(u => u.email === email && u.id !== currentUser.id);
+            if (existingUser) {
+                alert('Email already exists');
+                return;
+            }
+            
+            // Update user
+            currentUser.name = name;
+            currentUser.email = email;
+            currentUser.phone = phone;
+            currentUser.company = company;
+            
+            // Update in users array
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            if (userIndex !== -1) {
+                users[userIndex] = currentUser;
+            }
+            
+            saveUsers();
+            localStorage.setItem('cyberguard_currentUser', JSON.stringify(currentUser));
+            updateDashboard();
+            alert('Profile updated successfully!');
+        }
+
+        function handleContact(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            // Simulate sending message
+            alert(`Thank you for your message, ${name}! We'll get back to you soon.`);
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+        }
+
+        // Utility functions
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showError(elementId, message) {
+            document.getElementById(elementId).textContent = message;
+        }
+
+        function clearErrors() {
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(el => el.textContent = '');
+        }
+
+        // Navigation
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('main');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            // Hide quiz results if showing
+            document.getElementById('quizResults').classList.add('hidden');
+        }
+
+        function showDashboardSection(sectionId) {
+            if (!currentUser) {
+                showPage('login');
+                return;
+            }
+            
+            const sections = document.querySelectorAll('.dashboard-section');
+            sections.forEach(section => section.classList.add('hidden'));
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Update active sidebar link
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            sidebarLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Load section-specific data
+            if (sectionId === 'profile') {
+                loadProfileData();
+            } else if (sectionId === 'quiz') {
+                resetQuiz();
+            }
+        }
+
+        function updateDashboard() {
+            if (!currentUser) return;
+            
+            // Update user info
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileEmail').textContent = currentUser.email;
+            document.getElementById('profileAvatar').innerHTML = currentUser.name.charAt(0).toUpperCase();
+            
+            // Update stats
+            document.getElementById('totalQuizzes').textContent = userStats.totalQuizzes;
+            document.getElementById('averageScore').textContent = userStats.averageScore + '%';
+            document.getElementById('securityScore').textContent = userStats.securityScore;
+            document.getElementById('threatsStopped').textContent = userStats.threatsStopped;
+            
+            // Update progress bars
+            document.getElementById('overallProgress').style.width = userStats.securityScore + '%';
+            document.getElementById('overallProgressText').textContent = userStats.securityScore + '% - ' + getSecurityLevel(userStats.securityScore);
+            
+            document.getElementById('quizProgress').style.width = userStats.averageScore + '%';
+            document.getElementById('quizProgressText').textContent = userStats.averageScore + '% - ' + getQuizLevel(userStats.averageScore);
+            
+            const moduleProgress = Math.min(userStats.totalQuizzes * 20, 100);
+            document.getElementById('moduleProgress').style.width = moduleProgress + '%';
+            document.getElementById('moduleProgressText').textContent = moduleProgress + '% - ' + getModuleLevel(moduleProgress);
+            
+            // Update recent activity
+            updateRecentActivity();
+        }
+
+        function loadProfileData() {
+            if (!currentUser) return;
+            
+            document.getElementById('profileFullName').value = currentUser.name || '';
+            document.getElementById('profileEmailInput').value = currentUser.email || '';
+            document.getElementById('profilePhone').value = currentUser.phone || '';
+            document.getElementById('profileCompany').value = currentUser.company || '';
+        }
+
+        function getSecurityLevel(score) {
+            if (score >= 90) return 'Expert';
+            if (score >= 70) return 'Advanced';
+            if (score >= 50) return 'Intermediate';
+            if (score >= 30) return 'Beginner';
+            return 'Getting Started';
+        }
+
+        function getQuizLevel(score) {
+            if (score >= 90) return 'Excellent';
+            if (score >= 70) return 'Good';
+            if (score >= 50) return 'Average';
+            if (score >= 30) return 'Needs Improvement';
+            return 'No quizzes completed';
+        }
+
+        function getModuleLevel(progress) {
+            if (progress >= 80) return 'Almost Complete';
+            if (progress >= 60) return 'Making Progress';
+            if (progress >= 40) return 'Getting Started';
+            if (progress >= 20) return 'Just Started';
+            return 'No modules completed';
+        }
+
+        function updateRecentActivity() {
+            const activityDiv = document.getElementById('recentActivity');
+            if (userStats.recentActivity.length === 0) {
+                activityDiv.innerHTML = '<p>No recent activity to display.</p>';
+                return;
+            }
+            
+            const activityHTML = userStats.recentActivity.slice(-5).map(activity => 
+                `<div style="padding: 0.5rem; margin: 0.5rem 0; background: #f8f9fa; border-radius: 5px;">
+                    <strong>${activity.type}</strong> - ${activity.description}
+                    <br><small>${new Date(activity.timestamp).toLocaleDateString()}</small>
+                </div>`
+            ).join('');
+            
+            activityDiv.innerHTML = activityHTML;
+        }
+
+        function addActivity(type, description) {
+            userStats.recentActivity.push({
+                type,
+                description,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Keep only last 10 activities
+            if (userStats.recentActivity.length > 10) {
+                userStats.recentActivity = userStats.recentActivity.slice(-10);
+            }
+            
+            saveUserStats();
         }
 
         // Quiz functionality
         function selectOption(element, isCorrect) {
-            const options = element.parentElement.querySelectorAll('.option');
+            if (quizSubmitted) return;
+            
+            const question = element.closest('.question');
+            const options = question.querySelectorAll('.option');
+            
+            // Clear previous selections
             options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Select current option
             element.classList.add('selected');
             
-            // Show correct/incorrect styling
-            setTimeout(() => {
-                options.forEach(opt => {
-                    if (opt.onclick.toString().includes('true')) {
-                        opt.classList.add('correct');
-                    } else if (opt.classList.contains('selected') && !isCorrect) {
-                        opt.classList.add('incorrect');
-                    }
-                });
-                
-                if (isCorrect) {
-                    quizScore++;
-                }
-                
-                // Show next button
-                if (currentQuestion < totalQuestions) {
-                    document.getElementById('nextBtn').style.display = 'inline-block';
-                } else {
-                    document.getElementById('finishBtn').style.display = 'inline-block';
-                }
-            }, 500);
+            // Store answer
+            const questionId = question.id;
+            const questionIndex = parseInt(questionId.replace('question', '')) - 1;
+            quizAnswers[questionIndex] = isCorrect;
         }
 
-        function nextQuestion() {
-            document.getElementById(`question${currentQuestion}`).classList.add('hidden');
-            currentQuestion++;
-            document.getElementById(`question${currentQuestion}`).classList.remove('hidden');
-            document.getElementById('nextBtn').style.display = 'none';
-        }
-
-        function finishQuiz() {
-            document.getElementById('quizContent').classList.add('hidden');
-            document.getElementById('quizResults').classList.remove('hidden');
-            const percentage = Math.round((quizScore / totalQuestions) * 100);
-            document.getElementById('finalScore').textContent = `${percentage}% (${quizScore}/${totalQuestions})`;
-        }
-
-        function restartQuiz() {
-            currentQuestion = 1;
-            quizScore = 0;
-            document.getElementById('quizContent').classList.remove('hidden');
-            document.getElementById('quizResults').classList.add('hidden');
+        function submitQuiz() {
+            if (quizSubmitted) return;
             
-            // Reset all questions
-            for (let i = 1; i <= totalQuestions; i++) {
-                const question = document.getElementById(`question${i}`);
-                if (i === 1) {
-                    question.classList.remove('hidden');
-                } else {
-                    question.classList.add('hidden');
-                }
-                
-                // Reset options
+            quizSubmitted = true;
+            
+            // Show correct/incorrect answers
+            const questions = document.querySelectorAll('.question');
+            questions.forEach((question, index) => {
                 const options = question.querySelectorAll('.option');
-                options.forEach(opt => {
-                    opt.classList.remove('selected', 'correct', 'incorrect');
+                options.forEach((option, optIndex) => {
+                    const isCorrect = option.onclick.toString().includes('true');
+                    const isSelected = option.classList.contains('selected');
+                    
+                    if (isCorrect) {
+                        option.classList.add('correct');
+                    } else if (isSelected && !isCorrect) {
+                        option.classList.add('incorrect');
+                    }
+                    
+                    option.onclick = null; // Disable further clicks
                 });
+            });
+            
+            // Calculate score
+            const correctAnswers = quizAnswers.filter(answer => answer === true).length;
+            const totalQuestions = quizAnswers.length;
+            const score = Math.round((correctAnswers / totalQuestions) * 100);
+            
+            // Update user stats
+            userStats.totalQuizzes++;
+            userStats.totalScore += score;
+            userStats.averageScore = Math.round(userStats.totalScore / userStats.totalQuizzes);
+            userStats.securityScore = Math.min(userStats.securityScore + (score > 60 ? 5 : 0), 100);
+            userStats.threatsStopped += correctAnswers;
+            
+            addActivity('Quiz Completed', `Scored ${score}% on cybersecurity quiz`);
+            
+            // Show results
+            showQuizResults(correctAnswers, totalQuestions, score);
+            
+            // Hide submit button
+            document.getElementById('submitQuizBtn').style.display = 'none';
+            
+            saveUserStats();
+            updateDashboard();
+        }
+
+        function showQuizResults(correct, total, score) {
+            const resultsDiv = document.getElementById('quizResults');
+            const scoreCircle = document.getElementById('scoreCircle');
+            const scoreText = document.getElementById('scoreText');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultMessage = document.getElementById('resultMessage');
+            const resultTips = document.getElementById('resultTips');
+            
+            // Update score circle
+            const percentage = (correct / total) * 100;
+            scoreCircle.style.setProperty('--percentage', percentage * 3.6 + 'deg');
+            scoreText.textContent = `${correct}/${total}`;
+            
+            // Update result content
+            if (score >= 80) {
+                resultTitle.textContent = 'Excellent!';
+                resultMessage.textContent = 'You have a strong understanding of cybersecurity principles.';
+            } else if (score >= 60) {
+                resultTitle.textContent = 'Good Job!';
+                resultMessage.textContent = 'You have a good grasp of cybersecurity basics with room for improvement.';
+            } else {
+                resultTitle.textContent = 'Keep Learning!';
+                resultMessage.textContent = 'Consider reviewing cybersecurity fundamentals to improve your knowledge.';
             }
             
-            document.getElementById('nextBtn').style.display = 'none';
-            document.getElementById('finishBtn').style.display = 'none';
+            // Add tips based on performance
+            const tips = [
+                'Always use strong, unique passwords for each account',
+                'Enable two-factor authentication whenever possible',
+                'Be cautious of suspicious emails and links',
+                'Keep your software and systems updated',
+                'Use reputable antivirus software'
+            ];
+            
+            resultTips.innerHTML = '<h4>Security Tips:</h4><ul>' + 
+                tips.map(tip => `<li>${tip}</li>`).join('') + '</ul>';
+            
+            // Show results
+            resultsDiv.classList.remove('hidden');
+            
+            // Scroll to results
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetQuiz() {
+            quizSubmitted = false;
+            quizAnswers = [];
+            
+            // Reset all options
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                // Re-enable clicks
+                const isCorrect = option.getAttribute('data-correct') === 'true' || option.onclick.toString().includes('true');
+                option.onclick = () => selectOption(option, isCorrect);
+            });
+            
+            // Show submit button
+            document.getElementById('submitQuizBtn').style.display = 'block';
+            
+            // Hide results
+            document.getElementById('quizResults').classList.add('hidden');
         }
 
         // Phishing simulation
-        document.getElementById('phishingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('phishingAlert').classList.remove('hidden');
-            showNotification('Good catch! This was a phishing attempt.', 'success');
-        });
+        function showPhishingAlert() {
+            userStats.threatsStopped++;
+            addActivity('Phishing Detected', 'Identified a phishing simulation attempt');
+            saveUserStats();
+            updateDashboard();
+            
+            alert('🚨 PHISHING DETECTED! 🚨\n\nGood job! You just interacted with a phishing simulation. In real life, this could have stolen your credentials. Always verify the URL and sender before entering sensitive information.');
+        }
 
         // AI Assistant
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
         function sendMessage() {
             const input = document.getElementById('chatInput');
             const message = input.value.trim();
             
-            if (message) {
-                addMessage(message, 'user');
-                input.value = '';
-                
-                // Simulate AI response
-                setTimeout(() => {
-                    const response = getAIResponse(message);
-                    addMessage(response, 'bot');
-                }, 1000);
-            }
+            if (!message) return;
+            
+            // Add user message
+            addChatMessage('user', message);
+            
+            // Clear input
+            input.value = '';
+            
+            // Simulate AI response
+            setTimeout(() => {
+                const response = generateAIResponse(message);
+                addChatMessage('ai', response);
+            }, 1000);
         }
 
-        function addMessage(message, sender) {
-            const messagesContainer = document.getElementById('chatMessages');
+        function addChatMessage(sender, message) {
+            const chatMessages = document.getElementById('chatMessages');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}`;
-            messageDiv.textContent = message;
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            if (sender === 'user') {
+                messageDiv.innerHTML = `<strong>You:</strong> ${message}`;
+            } else {
+                messageDiv.innerHTML = `<strong>CyberGuard AI:</strong> ${message}`;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        function getAIResponse(message) {
-            const responses = {
-                'password': 'Strong passwords should be at least 12 characters long, include uppercase, lowercase, numbers, and special characters. Consider using a password manager!',
-                'phishing': 'Common phishing signs: urgent language, suspicious URLs, requests for personal info, generic greetings, and grammar errors. Always verify the sender!',
-                'malware': 'Protect against malware by keeping software updated, using antivirus, avoiding suspicious downloads, and being cautious with email attachments.',
-                'mfa': 'Multi-Factor Authentication adds extra security layers. Use authenticator apps, SMS, or hardware tokens for better protection.',
-                'social': 'For social media security: review privacy settings, limit personal information, be careful with friend requests, and think before posting.',
-                'email': 'Email security tips: use strong passwords, enable 2FA, be wary of attachments, verify sender identity, and keep software updated.'
-            };
-            
+        function generateAIResponse(message) {
             const lowerMessage = message.toLowerCase();
-            for (const [key, response] of Object.entries(responses)) {
-                if (lowerMessage.includes(key)) {
-                    return response;
-                }
+            
+            if (lowerMessage.includes('password')) {
+                return 'Strong passwords should be at least 12 characters long and include uppercase letters, lowercase letters, numbers, and symbols. Never reuse passwords across multiple accounts. Consider using a password manager to generate and store unique passwords securely.';
             }
             
-            return "Great question! Here are some general cybersecurity tips: Use strong, unique passwords; enable MFA; keep software updated; be cautious with links and attachments; and regularly backup your data. What specific area would you like to know more about?";
-        }
-
-        // Chat input enter key
-        document.getElementById('chatInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
+            if (lowerMessage.includes('phishing')) {
+                return 'To avoid phishing attacks: 1) Always check the sender\'s email address carefully, 2) Don\'t click suspicious links - hover over them to see the real URL, 3) Be wary of urgent requests for personal information, 4) Verify requests through official channels, 5) Use email filters and security software.';
             }
-        });
-
-        // Notification system
-        function showNotification(message, type) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                padding: 1rem 2rem;
-                border-radius: 8px;
-                color: white;
-                font-weight: 500;
-                z-index: 10000;
-                animation: slideIn 0.3s ease-out;
-                background: ${type === 'success' ? '#10b981' : '#ef4444'};
-            `;
-            notification.textContent = message;
-            document.body.appendChild(notification);
             
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-
-        // Animation keyframes
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
+            if (lowerMessage.includes('2fa') || lowerMessage.includes('two-factor')) {
+                return 'Two-factor authentication (2FA) adds an extra layer of security by requiring a second form of verification beyond your password. This could be a code sent to your phone, an authenticator app, or a hardware token. Enable 2FA on all important accounts like email, banking, and social media.';
             }
-        `;
-        document.head.appendChild(style);
-
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add some sample threat data to dashboard
-            updateThreatFeed();
-        });
-
-        function updateThreatFeed() {
-            // Simulate real-time threat updates
-            const threats = [
-                "New phishing campaign targeting banking customers",
-                "Ransomware variant 'CryptoLocker2024' detected",
-                "Social engineering attacks via WhatsApp increasing"
-            ];
             
-            // This would update the dashboard in a real app
-            console.log("Threat feed updated:", threats);
+            if (lowerMessage.includes('wifi') || lowerMessage.includes('wi-fi')) {
+                return 'When using public Wi-Fi: 1) Avoid accessing sensitive accounts, 2) Use a VPN for encrypted connections, 3) Turn off auto-connect features, 4) Verify the network name with staff, 5) Keep your device\'s sharing settings off, 6) Use your phone\'s hotspot instead when possible.';
+            }
+            
+            if (lowerMessage.includes('malware') || lowerMessage.includes('virus')) {
+                return 'Protect against malware by: 1) Keeping your operating system and software updated, 2) Using reputable antivirus software, 3) Avoiding suspicious downloads and email attachments, 4) Being cautious with USB drives, 5) Regularly backing up important data, 6) Using standard user accounts instead of admin accounts for daily tasks.';
+            }
+            
+            if (lowerMessage.includes('backup')) {
+                return 'Follow the 3-2-1 backup rule: Keep 3 copies of important data, store them on 2 different types of media, and keep 1 copy offsite. Regularly test your backups to ensure they work. Consider using both cloud storage and physical backups for maximum security.';
+            }
+            
+            if (lowerMessage.includes('social media') || lowerMessage.includes('privacy')) {
+                return 'For social media security: 1) Review and adjust privacy settings regularly, 2) Be cautious about what personal information you share, 3) Don\'t accept friend requests from strangers, 4) Be wary of social engineering attempts, 5) Use strong passwords and 2FA, 6) Think before posting - information can be permanent.';
+            }
+            
+            if (lowerMessage.includes('update') || lowerMessage.includes('patch')) {
+                return 'Software updates are crucial for security. They often contain patches for newly discovered vulnerabilities. Enable automatic updates when possible, prioritize security updates, and keep all software current - including your operating system, browsers, and applications.';
+            }
+            
+            if (lowerMessage.includes('ransomware')) {
+                return 'Prevent ransomware by: 1) Regular backups stored offline, 2) Keeping software updated, 3) Using email filtering and web protection, 4) Training users to recognize suspicious emails, 5) Limiting user privileges, 6) Having an incident response plan. Never pay ransom demands.';
+            }
+            
+            if (lowerMessage.includes('thank')) {
+                return 'You\'re welcome! Stay vigilant and keep learning about cybersecurity. Remember, security is an ongoing process, not a one-time setup. Feel free to ask me any other cybersecurity questions!';
+            }
+            
+            // Default response
+            return 'That\'s a great question about cybersecurity! Here are some general tips: Always use strong, unique passwords; enable two-factor authentication; be cautious of suspicious emails and links; keep your software updated; and regularly back up your data. Is there a specific aspect of cybersecurity you\'d like to know more about?';
         }
 
-        // Progressive Web App features
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').catch(console.error);
+        // Initialize with some sample data for demonstration
+        if (users.length === 0) {
+            // Add a demo user for testing
+            users.push({
+                id: 1,
+                name: 'Demo User',
+                email: 'demo@cyberguard.com',
+                password: 'password123',
+                phone: '+1234567890',
+                company: 'CyberGuard Inc.',
+                stats: {
+                    totalQuizzes: 3,
+                    totalScore: 240,
+                    averageScore: 80,
+                    securityScore: 75,
+                    threatsStopped: 12,
+                    recentActivity: [
+                        {
+                            type: 'Quiz Completed',
+                            description: 'Scored 80% on cybersecurity quiz',
+                            timestamp: new Date().toISOString()
+                        },
+                        {
+                            type: 'Phishing Detected',
+                            description: 'Identified a phishing simulation attempt',
+                            timestamp: new Date().toISOString()
+                        }
+                    ]
+                },
+                createdAt: new Date().toISOString()
+            });
+            saveUsers();
         }
-
-        // Add mobile touch gestures
-        let touchStartX = 0;
-        let touchStartY = 0;
-
-        document.addEventListener('touchstart', function(e) {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-        });
-
-        document.addEventListener('touchmove', function(e) {
-            if (!touchStartX || !touchStartY) return;
-            
-            const touchEndX = e.touches[0].clientX;
-            const touchEndY = e.touches[0].clientY;
-            
-            const diffX = touchStartX - touchEndX;
-            const diffY = touchStartY - touchEndY;
-            
-            // Swipe detection could be added here for mobile navigation
-        });
     </script>
+</body>
+</html>
