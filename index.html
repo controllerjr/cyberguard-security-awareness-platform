@@ -621,6 +621,8 @@
                 <div class="dashboard-content">
                     <div id="overview" class="dashboard-section">
                         <h2>Welcome back, <span id="userName">User</span>!</h2>
+                        <p>Email: <strong id="userEmail">user@example.com</strong></p>
+                        <p>Joined on: <strong id="userJoinDate">Jan 1, 2024</strong></p>
                         <div class="stats-grid">
                             <div class="stat-card">
                                 <h3 id="totalQuizzes">0</h3>
@@ -729,7 +731,53 @@
                                         <div class="option" onclick="selectOption(this, false)">Only use password-protected networks</div>
                                         <div class="option" onclick="selectOption(this, false)">Avoid all public Wi-Fi</div>
                                     </div>
+                                    <div class="question" id="question6">
+                              <h3>6. What is a common indicator of a phishing website?</h3>
+                                <div class="options">
+                                    <div class="option" onclick="selectOption(this, true)">Misspelled URL</div>
+                                    <div class="option" onclick="selectOption(this, false)">Trusted SSL certificate</div>
+                                    <div class="option" onclick="selectOption(this, false)">No login required</div>
+                                    <div class="option" onclick="selectOption(this, false)">Fast internet speed</div>
                                 </div>
+                            </div>
+                            <div class="question" id="question7">
+                                <h3>7. What does a firewall do?</h3>
+                                <div class="options">
+                                    <div class="option" onclick="selectOption(this, true)">Blocks unauthorized access</div>
+                                    <div class="option" onclick="selectOption(this, false)">Boosts Wi-Fi signal</div>
+                                    <div class="option" onclick="selectOption(this, false)">Creates antivirus software</div>
+                                    <div class="option" onclick="selectOption(this, false)">Deletes malware automatically</div>
+                                </div>
+                            </div>
+                            <div class="question" id="question8">
+                                <h3>8. Which of these is NOT a secure method of storage?</h3>
+                                <div class="options">
+                                    <div class="option" onclick="selectOption(this, false)">Encrypted cloud storage</div>
+                                    <div class="option" onclick="selectOption(this, true)">Plaintext file on desktop</div>
+                                    <div class="option" onclick="selectOption(this, false)">External encrypted drive</div>
+                                    <div class="option" onclick="selectOption(this, false)">Password-protected folder</div>
+                                </div>
+                            </div>
+                            <div class="question" id="question9">
+                                <h3>9. What does HTTPS mean?</h3>
+                                <div class="options">
+                                    <div class="option" onclick="selectOption(this, false)">HyperText Transmission Protocol</div>
+                                    <div class="option" onclick="selectOption(this, true)">Secure version of HTTP</div>
+                                    <div class="option" onclick="selectOption(this, false)">High-Traffic Telecom Service</div>
+                                    <div class="option" onclick="selectOption(this, false)">Hyper Tracking Tag Protocol</div>
+                                </div>
+                            </div>
+                            <div class="question" id="question10">
+                                <h3>10. What should you do before clicking on a link in an email?</h3>
+                                <div class="options">
+                                    <div class="option" onclick="selectOption(this, true)">Hover over it to inspect the URL</div>
+                                    <div class="option" onclick="selectOption(this, false)">Click and check the result</div>
+                                    <div class="option" onclick="selectOption(this, false)">Reply to confirm authenticity</div>
+                                    <div class="option" onclick="selectOption(this, false)">Forward to your friend</div>
+                                </div>
+                            </div>
+
+                            </div>
                             </div>
                             <button class="btn btn-primary" onclick="submitQuiz()" id="submitQuizBtn">Submit Quiz</button>
                         </div>
@@ -810,6 +858,16 @@
                             <div style="margin-top: 2rem;">
                                 <h3>Recent Achievements</h3>
                                 <div id="achievements">
+                                    <div class="achievement">
+                              <i class="fas fa-trophy"></i>
+                              <p>First Quiz</p>
+                            </div>
+
+                                 <div class="achievement" style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center; min-width: 100px;">
+                                 <i class="fas fa-award" style="font-size: 2rem; color: #20c997;"></i>
+                                <p>10 Questions Completed</p>
+                            </div>
+
                                     <p>Complete your first quiz to earn achievements!</p>
                                 </div>
                             </div>
@@ -1192,6 +1250,9 @@
             document.getElementById('profileName').textContent = currentUser.name;
             document.getElementById('profileEmail').textContent = currentUser.email;
             document.getElementById('profileAvatar').innerHTML = currentUser.name.charAt(0).toUpperCase();
+            document.getElementById('userEmail').textContent = currentUser.email;
+            document.getElementById('userJoinDate').textContent = new Date(currentUser.joinDate).toDateString();
+
             
             // Update stats
             document.getElementById('totalQuizzes').textContent = userStats.totalQuizzes;
@@ -1514,11 +1575,11 @@
                 id: 1,
                 name: 'Demo User',
                 email: 'demo@cyberguard.com',
-                password: 'password123',
+                password: 'Password123',
                 phone: '+1234567890',
                 company: 'CyberGuard Inc.',
                 stats: {
-                    totalQuizzes: 3,
+                    totalQuizzes: 10,
                     totalScore: 240,
                     averageScore: 80,
                     securityScore: 75,
