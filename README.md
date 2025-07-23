@@ -4,7 +4,7 @@ An AI-powered cybersecurity education platform designed to help users learn abou
 🎯 Project Overview
 CyberGuard is a comprehensive web-based cybersecurity awareness platform built for the 3MTT Knowledge Showcase - July 2025. The platform addresses the critical need for cybersecurity education in Nigeria, where cyber threats are rapidly increasing.
 
-🌟 Live Demo: https://controllerjr.github.io/cyberguard
+🌟 Live Demo: https://controllerjr.github.io/cyberguard-security-awareness-platform/
 
 🚨 Problem Statement
 With over 5 million internet users in Nigeria, cybersecurity threats like phishing, identity theft, and online scams are becoming increasingly common. Many users lack the knowledge to identify and protect themselves from these threats, leading to significant financial and personal data losses.
@@ -84,11 +84,6 @@ Organizations: Training employees on security best practices
 This project was developed as part of the 3 Million Technical Talent (3MTT) Knowledge Showcase - July 2025 under the AI-Powered Solution Showcase category.
 Project Goals
 
-Solve a real Nigerian cybersecurity problem
-Demonstrate AI integration in education
-Create scalable, impactful technology
-Showcase modern web development skills
-
 Fellow Information
 
 Name: Abubakar Sadiq Ibrahim
@@ -131,14 +126,12 @@ Email: ibraimabubakarsadeeq2022@gmail.com
 
 
 Project Links
-Live Demo: https://controllerjr.github.io/cyberguard
-Repository: https://github.com/controllerjr/cyberguard
+Live Demo:  https://controllerjr.github.io/cyberguard-security-awareness-platform/
+Repository: https://github.com/controllerjr/cyberguard-security-awareness-platform/
 Issues: Report bugs or request features
 
-📝 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-🙏 Acknowledgments
 
+🙏 Acknowledgments
 3MTT Program: For providing this incredible learning opportunity
 Honorable Minister: For supporting tech talent development in Nigeria
 3MTT Mentors: For guidance and technical support
